@@ -128,7 +128,7 @@ function add_simple_rule(){
   typeset -l d_port=$request
 
   read -p "$(echo -e "${yellow}[?] Source Port: ")" request
-  typeset -l $s_port=$request
+  typeset -l s_port=$request
   
   read -p "$(echo -e "${yellow}[?] Status {ACCEPT | DROP}: ")" request                           
   typeset -u status_packet=$request
