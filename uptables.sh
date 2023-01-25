@@ -12,7 +12,7 @@ declare -r cyan="\e[0;36m\033[1m"
 declare -r gray="\e[0;37m\033[1m"
 
 # Globals Variables
-declare arguments=($1 $2 $3 $4 $5 $6)
+declare arguments=($1 $2)
 
 # Creación del banner
 function banner(){
