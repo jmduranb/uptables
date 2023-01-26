@@ -130,7 +130,7 @@ function add_simple_rule(){
   read -p "$(echo -e "${yellow}[?] Source Port: ")" request
   typeset -l s_port=$request
   
-  read -p "$(echo -e "${yellow}[?] Status {ACCEPT | DROP}: ")" request                           
+  read -p "$(echo -e "${yellow}[?] Status {ACCEPT | DROP | MASQUERADE}: ")" request                           
   typeset -u status_packet=$request
  
   ip_command=("$chain" "-p $protocol" "-s $s_ip" "-d $d_ip" "-i $i_inter" "-o $o_inter" "--dport $d_port" "--sport $s_port" "-j $status_packet")
