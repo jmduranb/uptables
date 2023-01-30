@@ -1,7 +1,7 @@
 #!/bin/bash
-# autor @Zaytos
+# author @Zaytos
 
-# Colors
+# Colors for mesagges
 declare -r green="\e[0;32m\033[1m"
 declare -r end="\033[0m\e[0m"
 declare -r red="\e[0;31m\033[1m"
@@ -14,7 +14,7 @@ declare -r gray="\e[0;37m\033[1m"
 # Globals Variables
 declare arguments=($1 $2)
 
-# Creación del banner
+# Function for see banner of tool
 function banner(){
   echo -e "${yellow}+---------+---------+---------+---------+${end}"
   echo -e "${yellow}|      ${purple}__${yellow} | ${purple}___${yellow}     |  ${purple}__${yellow}     |  ${purple}___ __${yellow} |${end}"
@@ -33,6 +33,7 @@ function banner(){
   echo -e "${red}[!]Created by: Juan Manuel Duran Bizcocho (aka Zaytos)${end}\n"
 }
 
+# This function is for select other function depend the argument specify
 function select_function(){
   case $1 in
     "clear")
@@ -57,6 +58,7 @@ function select_function(){
   esac
 }
 
+# Clear the iptables rules
 function clear_ip(){ 
   iptables -t filter -F
   iptables -t nat -F
@@ -65,6 +67,7 @@ function clear_ip(){
   exit 1
 }
 
+# This function restart the count of packet recived or sent
 function restart_count(){
   iptables -Z
   iptables -t nat -Z
@@ -73,12 +76,8 @@ function restart_count(){
   exit 1
 }
 
+# This function add the type of defend politics
 function def_politics(){
-  #if [ $# -ne 2 ]; then
-  #  echo -e "${red}[!] To many arguments, displacing help menu"
-  #  help_menu
-  #fi
-  
   if [ "$1" == "any" ]; then
     iptables -P INPUT DROP
     iptables -P OUTPUT DROP
@@ -94,13 +93,15 @@ function def_politics(){
 
     echo -e "${blue}[*] Policies have been upgraded to permissive${end}"
     exit 1 
-
+    
   else 
     echo -e "${red}[!] This parameters are incorrect, displacing help menu . . .${end}"
     help_menu
   fi
 }
 
+# This is the proccess for add a new simple rule
+# Posible add the amount rules to add, using a loop using $2 argument 
 function add_simple_rule(){
   echo -e "${blue}[*] Creating a simple rule . . . Please answer the next cuestions${end}"
   read -p "$(echo -e "${yellow}[?] {APPEND | INSERT}: ")" request
@@ -174,12 +175,28 @@ function add_simple_rule(){
   exit 1
 }
 
+#Create function for see actually rules (no confirm){
+#function see_rules(){
+#
+#}
+
+#Create function for delete rules
+#function delete_rules(){
+#
+#}
+
+#Create function for one interactive mode (no confirm)
+#function interactive_mode(){
+#
+#}
+
+# Function for displace help menu
 function help_menu(){
   #text  
   exit 1
 }
 
-#MAIN
+# MAIN
 if [ "$(echo $UID)" != "0" ]; then
   echo -e "${red}[!] You need to run the program as root${end}"
   exit 1
