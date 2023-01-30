@@ -29,7 +29,6 @@ function banner(){
   echo -e "${yellow}+---------+---------+---------+---------+${end}"
   echo -e "${yellow}|${purple}REJECT   ${yellow}|${purple}icmp     ${yellow}|${purple}10.2.40.3${yellow}|${purple}anyware  ${yellow}|${end}"
   echo -e "${yellow}+---------+---------+---------+---------+${end}"
-
   echo -e "${red}[!]Created by: Juan Manuel Duran Bizcocho (aka Zaytos)${end}\n"
 }
 
@@ -133,7 +132,7 @@ function add_simple_rule(){
   
   read -p "$(echo -e "${yellow}[?] Status {ACCEPT | DROP | MASQUERADE}: ")" request                           
   typeset -u status_packet=$request
- 
+  
   ip_command=("$chain" "-p $protocol" "-s $s_ip" "-d $d_ip" "-i $i_inter" "-o $o_inter" "--dport $d_port" "--sport $s_port" "-j $status_packet")
 
   if [ -z "$protocol" ]; then 
